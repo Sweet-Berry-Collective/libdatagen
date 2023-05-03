@@ -20,7 +20,7 @@
 		"entrypoints": {
 			"init": {
 				"adapter": "kotlin",
-				"value": "io.github.sweetberrycollective.libdatagen.LibDataGenKt::main"
+				"value": "io.github.sweetberrycollective.libdatagen.impl.LibDataGenKt::main"
 			}
 		},
 		"depends": [

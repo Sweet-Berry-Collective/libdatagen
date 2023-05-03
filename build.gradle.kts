@@ -9,6 +9,8 @@ plugins {
 
 	alias(libs.plugins.kotlin)
 	alias(libs.plugins.quilt.loom)
+
+	kotlin("plugin.serialization") version "1.8.20"
 }
 
 val archives_base_name: String by project

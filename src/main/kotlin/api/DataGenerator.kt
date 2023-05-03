@@ -10,19 +10,54 @@ import org.quiltmc.qsl.resource.loader.api.ResourcePackRegistrationContext
 import java.nio.charset.Charset
 
 abstract class DataGenerator(
-    val context: ResourcePackRegistrationContext,
+    /**
+     * The modid to register everything under
+     * */
     val modid: String
 ) {
-    abstract fun generate(pack: InMemoryResourcePack)
+    /**
+     * Generates "Client" resources (textures, blockstates, models, ...)
+     * */
+    abstract fun InMemoryResourcePack.generateClient(context: ResourcePackRegistrationContext)
 
-    inline fun <reified T> writeFile(pack: InMemoryResourcePack, side: ResourceType, name: String, t: T) {
-        pack.putText(side, Identifier(modid, name), Json.encodeToString(t))
+    /**
+     * Generates "Server" resources (lang, loot tables, tags, ...)
+     * */
+    abstract fun InMemoryResourcePack.generateServer(context: ResourcePackRegistrationContext)
+
+    /**
+     * Writes a string to the pack at the given path
+     * @param side Must always be the side that you're registering on
+     * */
+    fun InMemoryResourcePack.writeFile(side: ResourceType, path: Identifier, text: String) {
+        putText(side, path, text)
     }
 
-    inline fun <reified T> getFile(path: Identifier): T? {
+    /**
+     * Writes an object to the pack at the given path, must be serializable with kotlinx.serialization
+     * @param side Must always be the side that you're registering on
+     * */
+    inline fun <reified T> InMemoryResourcePack.writeFileTyped(side: ResourceType, path: Identifier, t: T) {
+        writeFile(side, path, Json.encodeToString(t))
+    }
+
+    /**
+     * Reads a string from all resources at the given path
+     * */
+    fun getFile(context: ResourcePackRegistrationContext, path: Identifier): String? {
         return try {
-            val json = String(context.resourceManager().open(path).readAllBytes(), Charset.defaultCharset())
-            Json.decodeFromString(json)
+            String(context.resourceManager().open(path).readAllBytes(), Charset.defaultCharset())
+        } catch (err: Throwable) {
+            null
+        }
+    }
+
+    /**
+     * Reads an object from all resources at the given path, must be serializable with kotlinx.serialization
+     * */
+    inline fun <reified T> getFileTyped(context: ResourcePackRegistrationContext, path: Identifier): T? {
+        return try {
+            Json.decodeFromString((getFile(context, path) ?: return null))
         } catch (err: Throwable) {
             null
         }
