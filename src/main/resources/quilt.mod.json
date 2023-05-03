@@ -1,27 +1,26 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "com.example",
-		"id": "example_mod",
+		"group": "io.github.sweetberrycollective",
+		"id": "libdatagen",
 		"version": "${version}",
 		"metadata": {
-			"name": "Mod Name",
+			"name": "libdatagen",
 			"description": "A short description of your mod.",
 			"contributors": {
 				"Your name here": "Owner"
 			},
 			"contact": {
-				"homepage": "https://example.com/",
-				"issues": "https://github.com/QuiltMC/quilt-kotlin-template-mod/issues",
-				"sources": "https://github.com/QuiltMC/quilt-kotlin-template-mod"
+				"issues": "https://github.com/Sweet-Berry-Collective/libdatagen/issues",
+				"sources": "https://github.com/Sweet-Berry-Collective/libdatagen"
 			},
-			"icon": "assets/example_mod/icon.png"
+			"icon": "assets/libdatagen/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"init": {
 				"adapter": "kotlin",
-				"value": "com.example.example_mod.ExampleMod"
+				"value": "io.github.sweetberrycollective.libdatagen.LibDataGenKt::main"
 			}
 		},
 		"depends": [
@@ -43,5 +42,5 @@
 			}
 		]
 	},
-	"mixin": "example_mod.mixins.json"
+	"mixin": "libdatagen.mixins.json"
 }
