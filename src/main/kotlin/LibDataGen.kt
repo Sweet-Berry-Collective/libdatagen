@@ -1,5 +1,7 @@
 package io.github.sweetberrycollective.libdatagen
 
-fun main() {
+import org.quiltmc.loader.api.ModContainer
+
+fun main(mod: ModContainer) {
 
 }
