@@ -21,6 +21,7 @@ fun register(
     context.addResourcePack(pack)
 }
 
+@Suppress("UNUSED", "UNUSED_PARAMETER")
 fun main(mod: ModContainer) {
     ResourceLoader.get(ResourceType.CLIENT_RESOURCES).registerDefaultResourcePackEvent.register { context ->
         register(context, client_pack) {

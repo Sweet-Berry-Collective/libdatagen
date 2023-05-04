@@ -4,7 +4,7 @@ import net.minecraft.registry.Registry
 import org.quiltmc.qkl.library.registry.RegistryAction
 import org.quiltmc.qkl.library.registry.invoke
 
-abstract class Registrator(
+abstract class Registrar(
     /**
      * The modid to register everything under
      * */
