@@ -10,13 +10,4 @@ private val data_generator = RegistryKey.ofRegistry<DataGenerator>(Identifier("l
 private val registrar = RegistryKey.ofRegistry<Registrar>(Identifier("libdatagen", "registrators"))
 
 object DataGeneratorRegistry : SimpleRegistry<DataGenerator>(data_generator, Lifecycle.stable())
-object RegistrarRegistry : SimpleRegistry<Registrar>(registrar, Lifecycle.stable()) {
-    override fun register(
-        key: RegistryKey<Registrar>,
-        entry: Registrar,
-        lifecycle: Lifecycle
-    ): Holder.Reference<Registrar> {
-        entry.register()
-        return super.register(key, entry, lifecycle)
-    }
-}
+object RegistrarRegistry : SimpleRegistry<Registrar>(registrar, Lifecycle.stable())
